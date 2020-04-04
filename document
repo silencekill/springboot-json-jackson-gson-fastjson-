@@ -1,0 +1,34 @@
+json转化的工具:HttpMessageConverter
+    作用:
+    1.将服务器的数据转化为json字符串
+    2.将前端的json字符串转为java对象
+1.springboot与jackson
+    springMvc会自动引入jackson的依赖,也有jackson的自动化配置
+    类:JacksonHttpMessageConvertersConfiguration
+
+    当项目中没有自己配置会使用默认配置
+    需要自己配置的时候(两种方式)
+
+      1.自己定义配置提供一个MappingJackson2HttpMessageConverter
+      2.自己定义一个ObjectMapper
+
+2.springboot与Gson
+    需要引入Gson的依赖(去除spring-boot-starter-web中的jackson依赖)
+    当项目中没有自己配置会使用默认配置
+
+    需要自己配置的时候(两种方式)
+        1.自己定义提供一个GsonHttpMessageConverter
+        2.自己定义提供一个Gson
+
+
+3.springboot与Fastjson
+    需要引入Fastjson的依赖
+    项目中没有默认与fastjson的配置,需要自己手动配置提供一个HttpMessageConverter
+        @Bean
+        FastJsonHttpMessageConverter converter(){
+            FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
+            FastJsonConfig fastJsonConfig = new FastJsonConfig();
+            fastJsonConfig.setDateFormat("yyyy/MM/dd");
+            converter.setFastJsonConfig(fastJsonConfig);
+            return converter;
+        }
